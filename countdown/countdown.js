@@ -1,10 +1,9 @@
 // ✦ COUNTDOWN TIMER — Princess Rexaine's Debut
-// Event Date: April 24, 2026 (LOCAL TIME - FIXED)
+// Event Date: April 24, 2026 at 4:00 PM (LOCAL TIME - FIXED)
 
 document.addEventListener("DOMContentLoaded", () => {
-
   // ✅ Use LOCAL time (no timezone bugs)
-  const eventDate = new Date(2026, 3, 24, 0, 0, 0).getTime();
+  const eventDate = new Date(2026, 3, 24, 16, 0, 0).getTime(); // Updated to 4:00 PM (16:00)
 
   const countdownEl = document.getElementById("countdown");
   const daysEl = document.getElementById("days");
@@ -18,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 🎉 When event starts
     if (distance < 0) {
-      clearInterval(timerInterval);
+      clearInterval(timerInterval); // Stop the timer when the event has started
       countdownEl.innerHTML =
         '<p style="color:var(--gold-light);font-family:var(--font-serif);font-size:1.2rem;letter-spacing:0.2em;">✦ The celebration has begun! ✦</p>';
       return;
@@ -39,6 +38,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🚀 Run immediately + every second
   updateCountdown();
-  const timerInterval = setInterval(updateCountdown, 1000);
-
+  const timerInterval = setInterval(updateCountdown, 1000); // Update every second
 });
