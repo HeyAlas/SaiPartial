@@ -706,26 +706,178 @@ a   { text-decoration: none; color: inherit; }
 
 .masonry-grid {
   columns: 3;
-  column-gap: 12px;
+  column-gap: 14px;
   margin-top: 36px;
 }
 
 .masonry-item {
   break-inside: avoid;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   overflow: hidden;
-  border: 1px solid var(--beige);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(74, 52, 42, 0.10);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.masonry-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(74, 52, 42, 0.18);
 }
 
 .masonry-item img {
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
 
-.masonry-item:hover img { transform: scale(1.04); }
+.masonry-item:hover img {
+  transform: scale(1.04);
+}
 
+/* Hover overlay */
+.masonry-hover {
+  position: absolute;
+  inset: 0;
+  background: rgba(74, 52, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  border-radius: 10px;
+}
+
+.masonry-item:hover .masonry-hover {
+  opacity: 1;
+}
+
+/* Span variants for visual variety */
+.span-tall img {
+  height: auto;
+  min-height: 120%;
+}
+
+.span-wide {
+  break-inside: avoid;
+  column-span: none;
+}
+
+/* ── Lightbox ── */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 18, 14, 0.93);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lb-img-wrap {
+  max-width: 90vw;
+  max-height: 82vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-img-wrap img {
+  max-width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  animation: lbFadeIn 0.3s ease;
+}
+
+@keyframes lbFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.lb-close {
+  position: fixed;
+  top: 20px;
+  right: 28px;
+  background: none;
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-close:hover {
+  background: var(--gold);
+  color: var(--espresso);
+}
+
+.lb-prev,
+.lb-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(245, 241, 234, 0.08);
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  font-size: 1.4rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+
+.lb-prev:hover,
+.lb-next:hover {
+  background: var(--gold);
+  color: var(--espresso);
+}
+
+.lb-counter {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--beige);
+  letter-spacing: 0.2em;
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .masonry-grid { columns: 2; column-gap: 10px; }
+  .masonry-item { margin-bottom: 10px; }
+  .lb-prev { left: 8px; }
+  .lb-next { right: 8px; }
+}
+
+@media (max-width: 480px) {
+  .masonry-grid { columns: 2; column-gap: 8px; }
+}
 /* ============================================================
    ✦ FOOTER
 ============================================================ */
